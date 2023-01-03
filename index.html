@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap' rel='stylesheet'>
+
+</head>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+<body >
+    
+    <div>
+
+            <div>
+
+                <div style="width:100%;background-color:white">
+                <img src="https://i.postimg.cc/0QKgy0qJ/Screenshot-from-2022-12-29-12-50-11.png"/>
+                </div>
+                <hr style="border-top:1px solid lightgrey"/>
+                <div>
+                        <!-- <h1>Test Prep</h1>
+                        <p>Test Your Preparation for the competitive exams</p> -->
+                </div>
+
+            </div>
+
+           
+            <div>
+                    <!-- <input placeholder="Search iPrep "></input>
+
+
+                    <select style="cursor:pointer">
+
+                        <option>Categories</option>
+                        <option>Popular exams</option>
+                        <option>Engineering Entrance</option>
+                        <option>Medical</option>
+                        <option>Law, Arts & Commerce</option>
+                        <option>Defence & Police</option>
+                        <option>Computer & Information Technology</option>
+                        <option>Management</option>
+                        <option>Government Exams</option>
+                        <option>SSC</option>
+                        <option>Skill Aptitutde & Language Testing</option>
+                        <option>Foreign Education</option>
+                        <option>Designing</option>
+                        <option>Civil Services</option>
+                        <option>Others</option>
+                        <option>School Level - All India</option>
+
+                    </select> -->
+            </div>
+
+            <div style="font-family:Inter; color:#262626;font-size:32px;font-weight:500;margin:10px" > Test Prep </div>
+            <div id= "testprep" style="display:flex;gap:15px;flex-wrap:wrap"></div>
+
+            <div id="Exam_names"></div>
+
+           
+
+            
+
+<!-- 
+            <h1>Popular exams</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Engineering Entrance</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Medical</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Law, Arts & Commerce</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Defence & Police</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Computer & Information Technology</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Management</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Government Exams</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>SSC</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Skill Aptitutde & Language Testing</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Foreign Education</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Designing</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Civil Services</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>Others</h1>
+            <div style="height:25%;">
+                icons
+            </div>
+            <h1>School Level - All India</h1>
+            <div style="height:25%;">
+                icons
+            </div> -->
+
+    </div>
+
+<div id="check"></div>
+</div>
+   
+</body>
+
+
+<script>
+ var element=document.getElementById('check');
+ /* element.textContent="hello"; */
+var exams=document.getElementById('Exam_names');
+
+
+function call_api(category){
+
+                         var link;
+                        switch(category){
+                            case "Engineering Entrance":
+                               link = "https://exams.iprep.in/exams/engineering-entrance/528";
+                                break;
+                            case "Medical":
+                               link =  "https://exams.iprep.in/exams/medical/520";
+                                break;
+                            case "Law, Arts & Commerce":
+                               link =  "https://exams.iprep.in/exams/law-arts-commerce/530";
+                                break;
+                            case "Defence & Police":
+                                link = "https://exams.iprep.in/exams/defence-police/517";
+                                break;
+                            case "Computer & Information Technology":
+                                link = "https://exams.iprep.in/exams/computer-information-technology/524";
+                                break;
+                            case "Management":
+                                link = "https://exams.iprep.in/exams/management/519";
+                                break;
+                            case "Government Exams":
+                                link = "https://exams.iprep.in/exams/government-exams/525";
+                                break;
+                            case "SSC":
+                               link = "https://exams.iprep.in/exams/ssc/531";
+                                break;
+                            case "Skill Aptitutde & Language Testing":
+                                link = "https://exams.iprep.in/exams/skill-aptitude-and-language-test/523";
+                                break;
+                            case "Foreign Education":
+                                link = "https://exams.iprep.in/exams/foreign-education/532";
+                                break;
+                            case "Designing":
+                                link = "https://exams.iprep.in/exams/designing/522";
+                                break;
+                            case "Civil Services":
+                                link = "https://exams.iprep.in/exams/civil-services/518";
+                                break;
+                            case "Others":
+                                link = "https://exams.iprep.in/exams/others/533";
+                                break;
+                            case "School Level - All India":
+                                link = "https://exams.iprep.in/exams/school-level-all-india/529";
+                                break;
+                            default:alert(category," not found");
+                                    break;
+                        }
+                
+                      //  alert(link)
+                     // activates package link of specific category
+            
+                        activate_package(category,link);
+
+}
+
+
+
+
+                 function activate_package(package_name,link){
+   
+   var cookie_data=document.cookie;
+         
+         fetch('https://learn.iprep.in/api/testprep/activate', {
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "package_name": package_name,
+                "user_data":cookie_data
+            }),
+         }).then(res => res.json()
+         ).then(res => {        
+
+             console.log(res,"then result")
+              window.location.href=link;
+        }).catch(error =>{
+            
+            console.log('error: ', error);
+             window.location.href=link;
+           
+         }) 
+
+                 
+
+}
+   async function abcd(){
+
+        const firebaseConfig = {
+                apiKey: "AIzaSyC5CfgoBpjI09nel7ON4m-JfM9n_pM9MAI",
+                authDomain: "testprep-96355.firebaseapp.com",
+                databaseURL: "https://testprep-96355-default-rtdb.firebaseio.com",
+                projectId: "testprep-96355",
+                storageBucket: "testprep-96355.appspot.com",
+                messagingSenderId: "746715371704",
+                appId: "1:746715371704:web:8c2725e067901ec028bc4d",
+                measurementId: "G-P4DB4S55KQ"
+             };
+
+
+            firebase.initializeApp(firebaseConfig);
+
+            var messagesRef = firebase.database().ref('l0_exams_shortcuts');
+            var testprepRef= firebase.database().ref('cbse/1/english');
+
+             var tests=document.getElementById("testprep");
+            testprepRef.once('value').then((snapshot) => {
+
+                 const testprepJSON=snapshot.toJSON();
+
+                //console.log(testprepJSON,"result")
+                Object.keys(testprepJSON).forEach((key) => {
+
+                   // console.log(testprepJSON[key][0].href,"testprepjson")
+                    //individual category
+                    if(testprepJSON[key][0].name!="Popular exams"){
+                    const indivCat=document.createElement("div");
+                    indivCat.style.display="flex";
+                    indivCat.style.gap="10px";
+                    indivCat.style.alignItems="center";
+                    indivCat.style.cursor="pointer";
+                    indivCat.style.border="1px solid lightgrey";
+                    indivCat.style.paddingLeft="8px";
+                    indivCat.style.paddingRight="8px";
+                    indivCat.style.borderRadius="10px";
+                    const imgtest=document.createElement("img");
+                    imgtest.src=testprepJSON[key][0].icon;
+                    imgtest.style.height="20px";
+                    const catname=document.createElement("p");
+                    catname.textContent=testprepJSON[key][0].name;
+                    catname.style.fontFamily="Inter";
+                    catname.style.fontSize="26px"
+                    indivCat.appendChild(imgtest);
+                    indivCat.appendChild(catname);
+                    function testprepClicked(){
+                        call_api(testprepJSON[key][0].name)
+                    }
+                    indivCat.addEventListener("click", testprepClicked);
+                    tests.appendChild(indivCat);
+                    }
+                })
+
+                
+                
+
+})
+
+
+            // });
+            var arr=[];
+           messagesRef.once('value').then((snapshot) => {
+                const firebaseJSON = snapshot.toJSON();
+                
+
+                const testprep=document.getElementById("testprep")
+              
+
+
+                 Object.keys(firebaseJSON).forEach((key) => {
+                 
+                 const categoryDiv=document.createElement("div");
+                 categoryDiv.style.display="flex";
+                 categoryDiv.style.justifyContent="space-between";
+                 categoryDiv.style.alignItems="center";
+                 const SeeAll = document.createElement("button");
+                 SeeAll.textContent="See All";
+                 SeeAll.style.height="32px"
+                 SeeAll.style.backgroundColor="#0077FF0F";
+                 SeeAll.style.color="#0077FF";
+                 SeeAll.style.border="0";
+                 SeeAll.style.borderRadius="17px";
+                 SeeAll.style.cursor="pointer";
+                 SeeAll.style.fontSize="26px";
+                 function SeeAllclicked(){
+                    call_api(firebaseJSON[key][0].name);
+                 }
+                 SeeAll.addEventListener("click", SeeAllclicked);
+                 const category = document.createElement("h2");
+                 category.style.fontSize="22px";
+                 category.style.color="#282828";
+                 category.style.fontWeight="500";
+                 const examsDiv = document.createElement("div");
+                 Object.keys(firebaseJSON[key][0].sub_category).forEach((key1)=>{
+                 
+                //  console.log(firebaseJSON[key][0].sub_category[key1],"subcategory")
+                 
+                 examsDiv.style.display="flex";
+                 examsDiv.style.gap="30px";
+                 examsDiv.style.rowGap="30px";
+                 examsDiv.style.flexWrap="wrap";
+                 
+/*                  individual exam div with icon and exam name
+                  */            
+                 const iconAndName = document.createElement("div");
+                 iconAndName.style.display="flex";
+                 iconAndName.style.gap="12px";
+                 iconAndName.style.cursor="pointer";
+                 iconAndName.style.padding="12px";
+                 iconAndName.style.border="1px solid lightgrey";
+                 iconAndName.style.borderRadius="8px";
+                //  iconAndName.style.width="150px"
+                 
+                 const iconimage = document.createElement("img");
+                 iconimage.src=firebaseJSON[key][0].sub_category[key1].icon;
+                 iconimage.style.objectFit="contain";
+                 iconimage.onerror=()=>{
+                     iconimage.src="https://i.postimg.cc/3xfZ2fwP/plh.png";
+                 }
+                 iconAndName.appendChild(iconimage);
+                 const examName = document.createElement("p");
+                 examName.textContent=firebaseJSON[key][0].sub_category[key1].name;
+                 examName.style.fontFamily="Inter";
+                 examName.style.fontSize="26px";
+                 examName.style.color="#262626"
+                //   examName.style.maxWidth="75px";
+                if(examName.textContent.length>30)
+                examName.textContent=examName.textContent.slice(0, 15) +"...";
+                // examName.style.maxLength=20;
+                //   examName.style.overflow='hidden'
+                //  examName.style.textOverflow="ellipsis";
+                 iconAndName.appendChild(examName);
+
+
+
+
+// activate_package(firebaseJSON[key][0].sub_category[key1].l0,firebaseJSON[key][0].sub_category[key1].href)
+
+// }
+                    // console.log(firebaseJSON[key][0].sub_category[key1].l0,"l0");
+                    // console.log(firebaseJSON[key][0].sub_category[key1].href,"href");
+                    // activate_package(firebaseJSON[key][0].sub_category[key1].l0,firebaseJSON[key][0].sub_category[key1].href)
+
+                    function clicked(){
+    
+    var package=firebaseJSON[key][0].sub_category[key1].l0;
+    var link=firebaseJSON[key][0].sub_category[key1].href;
+     activate_package(package,link)
+}
+                 iconAndName.addEventListener("click", clicked);
+                 
+
+                 examsDiv.appendChild(iconAndName);
+                 })
+                 category.textContent=firebaseJSON[key][0].name;
+                 category.style.fontFamily="Inter";
+                 category.style.fontSize="32px";
+                 categoryDiv.appendChild(category)
+                 if(firebaseJSON[key][0].name!="Popular exams")
+                 {
+                 categoryDiv.style.marginTop="40px"
+                 categoryDiv.appendChild(SeeAll);
+
+                 }
+                 exams.appendChild(categoryDiv);
+                 exams.appendChild(examsDiv);
+                 
+                 
+                 });
+                
+            });    
+
+            
+
+         
+
+    }
+    abcd();
+    
+    
+   
+</script>
+</html>
